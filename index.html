@@ -41,9 +41,14 @@
 
         </div>
         <div id="board-container"></div>
-        <div id="won" class="display:none"></div>
-        <button id="reset" onclick=reset() class="btn btn-lg btn-outline-info">Reset</button>
+        <div id="won" style="display:none" class="stats"></div>
+        <button id="reset" style="padding:1rem;" onclick=reset() class="btn btn-lg btn-outline-info">Reset</button>
         <div id="oldstats" class="stats form-group">
+            <div id="instructions">
+                <p>
+                    Move the tiles to arrange the numbers in increasing order from 1 to <span id="num"></span>
+                </p>
+            </div>
             <label>Best Time:
                 <span id="besttime">
 
