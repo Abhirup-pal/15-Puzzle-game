@@ -5,9 +5,9 @@ let bgsuccess = "#cf5707", fcsuccess = "#e5ff00";
 let bgnormal = "#113606", fcnormal = "#00ffff";
 let time = 0, flag = false, moves = 0;
 let time_interval;
-
 oldstats_update();
 
+//updates the best time and least number of moves from the localstorage
 function oldstats_update() {
     let besttime = localStorage.getItem('time');
     let leastmoves = localStorage.getItem('leastmoves');
@@ -31,7 +31,7 @@ function oldstats_update() {
 function inputlengths() {
     height = parseInt(document.getElementById('getheight').value);
     width = (document.getElementById('getwidth').value);
-    if (height > 9 || width > 9 || height <= 2 || width <= 2) {
+    if (height > 9 || width > 9 || height < 2 || width < 2) {
         alert('The values of height and width should be in the range 2 to 9');
         return;
     }
@@ -41,6 +41,7 @@ function inputlengths() {
     moves = 0;
     time = 0;
     flag = false;
+    document.getElementById('num').innerText=String(width*height-1);
     adding_event_listeners_on_drawing_board();
     document.getElementById('inputlenghts').style.display = 'none';
     document.getElementById('won').style.display='none';
@@ -68,8 +69,8 @@ function shuffle() {
     for (let row = 1; row <= height; row++) {
         for (let column = 1; column <= width; column++) {
 
-            var row2 = Math.floor(Math.random() * 3 + 1);
-            var column2 = Math.floor(Math.random() * 3 + 1);
+            var row2 = Math.floor(Math.random() * height + 1);
+            var column2 = Math.floor(Math.random() * width + 1);
             swaptiles("row" + row + "column" + column, "row" + row2 + "column" + column2);
         }
     }
@@ -210,6 +211,7 @@ function reset() {
     window.clearInterval(time_interval);
     shuffle();
     colorchanger();
+    document.getElementById('won').style.display='none';
     time = 0;
     moves = 0;
     document.getElementById('moves').innerText = String(moves);
@@ -219,7 +221,7 @@ function ifwon(number) {
     if (number >= width * height - 1) {
         window.clearInterval(time_interval);
         document.getElementById("won").style.display='flex';
-        document.getElementById("won").innerHTML = "Congratulations! You have successfully finished this game. <br> Number of moves taken :" + moves + "<br> Time taken : " + document.getElementById("time").innerText + " mins";
+        document.getElementById("won").innerHTML = "Congratulations! You have successfully finished this game. <br> <div>Number of moves taken : <span class='result'>" + moves + "</span></div><div>Time taken : <span class='result'>" + document.getElementById("time").innerText + "</span> mins</div>";
         document.getElementById("board-container").style.fontSize = "3rem";
         //updating localstorage
         let besttime = localStorage.getItem('time');
