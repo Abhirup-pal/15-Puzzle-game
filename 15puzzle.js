@@ -122,6 +122,24 @@ function colorchanger() {
 
 function adding_event_listeners_on_drawing_board() {
     //mouse click control event listener
+   for (let i = 1; i <= height; i++) {
+    for (let j = 1; j <= width; j++) {
+        let id = "row" + i + "column" + j;
+        document.getElementById(id).addEventListener('click', function () {
+            let emptytile = (document.getElementsByClassName('empty'))[0];
+            let emptyid = emptytile.id;
+            let emptyrow = emptyid[3], emptycol = emptyid[10];
+            let currentrow = (this.id)[3], currentcolumn = (this.id)[10];
+            if (currentrow == emptyrow || currentcolumn == emptycol) {
+                swaptiles(id,emptyid);
+            }
+            ifwon(colorchanger());
+            document.getElementById('moves').innerText = String(moves);
+        });
+    }
+}
+    /*
+    //This is the old version of the game where only swapping between adjacent tiles is allowed
     for (let i = 1; i <= height; i++) {
         for (let j = 1; j <= width; j++) {
             let id = "row" + i + "column" + j;
@@ -155,7 +173,7 @@ function adding_event_listeners_on_drawing_board() {
             });
         }
     }
-
+    */
     //keyboard key control event listener
     document.onkeydown = function (e) {
         let emptytile = (document.getElementsByClassName('empty'))[0];
@@ -194,6 +212,7 @@ function adding_event_listeners_on_drawing_board() {
         }
         document.getElementById('moves').innerText = String(moves);
     };
+
 }
 function time_tracker() {
     time_interval = setInterval(() => {
