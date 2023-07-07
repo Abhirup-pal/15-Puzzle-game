@@ -4,6 +4,10 @@ This project is a web-based implementation of the classic 15 Puzzle game using H
 
 ## How to Play
 
+1. Visit https://abhirup-pal.github.io/15-Puzzle-game/
+
+or 
+
 1. Clone or download the repository.
 2. Open the `index.html` file in a web browser.
 3. Click on the tiles adjacent to the empty space to slide them into the empty spot.
